@@ -2,7 +2,7 @@
 /*
 Plugin Name: Durchblick Connector
 Description: Fügt den Durchblick App Code vor dem schließenden </head> Tag ein.
-Version: 1.1.2
+Version: 1.1.3
 Author: KeDe Digital
 GitHub Plugin URI: https://github.com/stkjj/durchblickappconnector
 Primary Branch: main
@@ -33,8 +33,8 @@ add_action('admin_init', 'durchblick_widget_init_options');
 // Einstellungsseite hinzufügen
 function durchblick_widget_add_admin_menu() {
     add_options_page(
-        'Durchblick Widget Einstellungen',
-        'Durchblick Widget',
+        'Durchblick Connector Einstellungen',
+        'Durchblick Connector',
         'manage_options',
         'durchblick-widget',
         'durchblick_widget_options_page'
@@ -46,7 +46,7 @@ add_action('admin_menu', 'durchblick_widget_add_admin_menu');
 function durchblick_widget_options_page() {
     ?>
     <div class="wrap">
-        <h1>Durchblick Widget Einstellungen</h1>
+        <h1>Durchblick Connector Einstellungen</h1>
         <form action="options.php" method="post">
             <?php
             settings_fields('durchblick_widget_options_group');
@@ -135,6 +135,16 @@ function durchblick_widget_settings_init() {
 }
 add_action('admin_init', 'durchblick_widget_settings_init');
 
+// Farbwähler Skripte und Styles hinzufügen
+function durchblick_widget_enqueue_color_picker( $hook_suffix ) {
+    if( 'settings_page_durchblick-widget' !== $hook_suffix ) {
+        return;
+    }
+    wp_enqueue_style( 'wp-color-picker' );
+    wp_enqueue_script( 'durchblick_widget_color_picker', plugins_url('color-picker.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
+}
+add_action( 'admin_enqueue_scripts', 'durchblick_widget_enqueue_color_picker' );
+
 // Felder rendern
 function durchblick_widget_apiKey_render() {
     $options = get_option('durchblick_widget_options');
@@ -153,21 +163,21 @@ function durchblick_widget_publicFeedback_render() {
 function durchblick_widget_primaryColor_render() {
     $options = get_option('durchblick_widget_options');
     ?>
-    <input type='text' name='durchblick_widget_options[primaryColor]' value='<?php echo $options['primaryColor']; ?>'>
+    <input type='text' class='color-field' name='durchblick_widget_options[primaryColor]' value='<?php echo $options['primaryColor']; ?>'>
     <?php
 }
 
 function durchblick_widget_secondaryColor_render() {
     $options = get_option('durchblick_widget_options');
     ?>
-    <input type='text' name='durchblick_widget_options[secondaryColor]' value='<?php echo $options['secondaryColor']; ?>'>
+    <input type='text' class='color-field' name='durchblick_widget_options[secondaryColor]' value='<?php echo $options['secondaryColor']; ?>'>
     <?php
 }
 
 function durchblick_widget_dotColor_render() {
     $options = get_option('durchblick_widget_options');
     ?>
-    <input type='text' name='durchblick_widget_options[dotColor]' value='<?php echo $options['dotColor']; ?>'>
+    <input type='text' class='color-field' name='durchblick_widget_options[dotColor]' value='<?php echo $options['dotColor']; ?>'>
     <?php
 }
 
