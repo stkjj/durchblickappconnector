@@ -2,18 +2,16 @@
 /*
 Plugin Name: Durchblick Connector
 Description: Fügt den Durchblick App Code vor dem schließenden </head> Tag ein.
-Version: 1.1.1
+Version: 1.1.2
 Author: KeDe Digital
 GitHub Plugin URI: https://github.com/stkjj/durchblickappconnector
 Primary Branch: main
 */
 
-<?php
-
 // Standardwerte definieren
 function durchblick_widget_get_default_options() {
     return array(
-        'apiKey' => '5625116251f37381cbda0341',
+        'apiKey' => '',
         'publicFeedback' => false,
         'primaryColor' => '#333',
         'secondaryColor' => '#ccc',
