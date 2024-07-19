@@ -1,15 +1,17 @@
 <?php
 /*
 Plugin Name: Durchblick Connector
-Description: Fügt den Durchblick App Code vor dem schließenden </head> Tag ein.
-Version: 1.1.3
-Author: KeDe Digital
+Description: Establishes the connction the <a href="https://durchblick.app/">Durchblick App Dashboard</a> and inserts the JavaScript Code for the Feedback Widget into the &lt;head&gt;.
+Version: 1.2
+Author: KeDe Digital LLP
+Text Domain: durchblick-connector
+Domain Path: /languages
 GitHub Plugin URI: https://github.com/stkjj/durchblickappconnector
 Primary Branch: main
 */
 
-// Standardwerte definieren
-function durchblick_widget_get_default_options() {
+// Define default options
+function durchblick_connector_get_default_options() {
     return array(
         'apiKey' => '',
         'publicFeedback' => false,
@@ -22,35 +24,35 @@ function durchblick_widget_get_default_options() {
     );
 }
 
-// Plugin-Optionen initialisieren
-function durchblick_widget_init_options() {
-    if (false === get_option('durchblick_widget_options')) {
-        add_option('durchblick_widget_options', durchblick_widget_get_default_options());
+// Initialize plugin options
+function durchblick_connector_init_options() {
+    if (false === get_option('durchblick_connector_options')) {
+        add_option('durchblick_connector_options', durchblick_connector_get_default_options());
     }
 }
-add_action('admin_init', 'durchblick_widget_init_options');
+add_action('admin_init', 'durchblick_connector_init_options');
 
-// Einstellungsseite hinzufügen
-function durchblick_widget_add_admin_menu() {
+// Add options page
+function durchblick_connector_add_admin_menu() {
     add_options_page(
-        'Durchblick Connector Einstellungen',
-        'Durchblick Connector',
+        __('Durchblick Connector Settings', 'durchblick-connector'),
+        __('Durchblick Connector', 'durchblick-connector'),
         'manage_options',
-        'durchblick-widget',
-        'durchblick_widget_options_page'
+        'durchblick-connector',
+        'durchblick_connector_options_page'
     );
 }
-add_action('admin_menu', 'durchblick_widget_add_admin_menu');
+add_action('admin_menu', 'durchblick_connector_add_admin_menu');
 
-// Einstellungsseite rendern
-function durchblick_widget_options_page() {
+// Render options page
+function durchblick_connector_options_page() {
     ?>
     <div class="wrap">
-        <h1>Durchblick Connector Einstellungen</h1>
+        <h1><?php _e('Durchblick Connector Settings', 'durchblick-connector'); ?></h1>
         <form action="options.php" method="post">
             <?php
-            settings_fields('durchblick_widget_options_group');
-            do_settings_sections('durchblick-widget');
+            settings_fields('durchblick_connector_options_group');
+            do_settings_sections('durchblick-connector');
             submit_button();
             ?>
         </form>
@@ -58,157 +60,157 @@ function durchblick_widget_options_page() {
     <?php
 }
 
-// Einstellungen und Felder registrieren
-function durchblick_widget_settings_init() {
-    register_setting('durchblick_widget_options_group', 'durchblick_widget_options', 'durchblick_widget_options_validate');
+// Register settings and fields
+function durchblick_connector_settings_init() {
+    register_setting('durchblick_connector_options_group', 'durchblick_connector_options', 'durchblick_connector_options_validate');
 
     add_settings_section(
-        'durchblick_widget_settings_section',
-        'Widget Einstellungen',
-        'durchblick_widget_settings_section_callback',
-        'durchblick-widget'
+        'durchblick_connector_settings_section',
+        __('Connector Settings', 'durchblick-connector'),
+        'durchblick_connector_settings_section_callback',
+        'durchblick-connector'
     );
 
     add_settings_field(
         'apiKey',
-        'API-Key',
-        'durchblick_widget_apiKey_render',
-        'durchblick-widget',
-        'durchblick_widget_settings_section'
+        __('API Key', 'durchblick-connector'),
+        'durchblick_connector_apiKey_render',
+        'durchblick-connector',
+        'durchblick_connector_settings_section'
     );
 
     add_settings_field(
         'publicFeedback',
-        'Öffentliches Feedback',
-        'durchblick_widget_publicFeedback_render',
-        'durchblick-widget',
-        'durchblick_widget_settings_section'
+        __('Allow Feedback', 'durchblick-connector'),
+        'durchblick_connector_publicFeedback_render',
+        'durchblick-connector',
+        'durchblick_connector_settings_section'
     );
 
     add_settings_field(
         'primaryColor',
-        'Primärfarbe',
-        'durchblick_widget_primaryColor_render',
-        'durchblick-widget',
-        'durchblick_widget_settings_section'
+        __('Primary Color', 'durchblick-connector'),
+        'durchblick_connector_primaryColor_render',
+        'durchblick-connector',
+        'durchblick_connector_settings_section'
     );
 
     add_settings_field(
         'secondaryColor',
-        'Sekundärfarbe',
-        'durchblick_widget_secondaryColor_render',
-        'durchblick-widget',
-        'durchblick_widget_settings_section'
+        __('Secondary Color', 'durchblick-connector'),
+        'durchblick_connector_secondaryColor_render',
+        'durchblick-connector',
+        'durchblick_connector_settings_section'
     );
 
     add_settings_field(
         'dotColor',
-        'Punktfarbe',
-        'durchblick_widget_dotColor_render',
-        'durchblick-widget',
-        'durchblick_widget_settings_section'
+        __('Dot Color', 'durchblick-connector'),
+        'durchblick_connector_dotColor_render',
+        'durchblick-connector',
+        'durchblick_connector_settings_section'
     );
 
     add_settings_field(
         'dotSize',
-        'Punktgröße',
-        'durchblick_widget_dotSize_render',
-        'durchblick-widget',
-        'durchblick_widget_settings_section'
+        __('Dot Size', 'durchblick-connector'),
+        'durchblick_connector_dotSize_render',
+        'durchblick-connector',
+        'durchblick_connector_settings_section'
     );
 
     add_settings_field(
         'enterFeedbackModeText',
-        'Text für Feedback-Modus starten',
-        'durchblick_widget_enterFeedbackModeText_render',
-        'durchblick-widget',
-        'durchblick_widget_settings_section'
+        __('Enter Feedback Mode Text', 'durchblick-connector'),
+        'durchblick_connector_enterFeedbackModeText_render',
+        'durchblick-connector',
+        'durchblick_connector_settings_section'
     );
 
     add_settings_field(
         'exitFeedbackModeText',
-        'Text für Feedback-Modus beenden',
-        'durchblick_widget_exitFeedbackModeText_render',
-        'durchblick-widget',
-        'durchblick_widget_settings_section'
+        __('Exit Feedback Mode Text', 'durchblick-connector'),
+        'durchblick_connector_exitFeedbackModeText_render',
+        'durchblick-connector',
+        'durchblick_connector_settings_section'
     );
 }
-add_action('admin_init', 'durchblick_widget_settings_init');
+add_action('admin_init', 'durchblick_connector_settings_init');
 
-// Farbwähler Skripte und Styles hinzufügen
-function durchblick_widget_enqueue_color_picker( $hook_suffix ) {
-    if( 'settings_page_durchblick-widget' !== $hook_suffix ) {
+// Enqueue color picker scripts and styles
+function durchblick_connector_enqueue_color_picker($hook_suffix) {
+    if ('settings_page_durchblick-connector' !== $hook_suffix) {
         return;
     }
-    wp_enqueue_style( 'wp-color-picker' );
-    wp_enqueue_script( 'durchblick_widget_color_picker', plugins_url('color-picker.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
+    wp_enqueue_style('wp-color-picker');
+    wp_enqueue_script('durchblick_connector_color_picker', plugins_url('color-picker.js', __FILE__), array('wp-color-picker'), false, true);
 }
-add_action( 'admin_enqueue_scripts', 'durchblick_widget_enqueue_color_picker' );
+add_action('admin_enqueue_scripts', 'durchblick_connector_enqueue_color_picker');
 
-// Felder rendern
-function durchblick_widget_apiKey_render() {
-    $options = get_option('durchblick_widget_options');
+// Render fields
+function durchblick_connector_apiKey_render() {
+    $options = get_option('durchblick_connector_options');
     ?>
-    <input type='text' name='durchblick_widget_options[apiKey]' value='<?php echo $options['apiKey']; ?>'>
+    <input type='text' name='durchblick_connector_options[apiKey]' value='<?php echo $options['apiKey']; ?>'>
     <?php
 }
 
-function durchblick_widget_publicFeedback_render() {
-    $options = get_option('durchblick_widget_options');
+function durchblick_connector_publicFeedback_render() {
+    $options = get_option('durchblick_connector_options');
     ?>
-    <input type='checkbox' name='durchblick_widget_options[publicFeedback]' <?php checked($options['publicFeedback'], 1); ?> value='1'>
+    <input type='checkbox' name='durchblick_connector_options[publicFeedback]' <?php checked($options['publicFeedback'], 1); ?> value='1'>
     <?php
 }
 
-function durchblick_widget_primaryColor_render() {
-    $options = get_option('durchblick_widget_options');
+function durchblick_connector_primaryColor_render() {
+    $options = get_option('durchblick_connector_options');
     ?>
-    <input type='text' class='color-field' name='durchblick_widget_options[primaryColor]' value='<?php echo $options['primaryColor']; ?>'>
+    <input type='text' class='color-field' name='durchblick_connector_options[primaryColor]' value='<?php echo $options['primaryColor']; ?>'>
     <?php
 }
 
-function durchblick_widget_secondaryColor_render() {
-    $options = get_option('durchblick_widget_options');
+function durchblick_connector_secondaryColor_render() {
+    $options = get_option('durchblick_connector_options');
     ?>
-    <input type='text' class='color-field' name='durchblick_widget_options[secondaryColor]' value='<?php echo $options['secondaryColor']; ?>'>
+    <input type='text' class='color-field' name='durchblick_connector_options[secondaryColor]' value='<?php echo $options['secondaryColor']; ?>'>
     <?php
 }
 
-function durchblick_widget_dotColor_render() {
-    $options = get_option('durchblick_widget_options');
+function durchblick_connector_dotColor_render() {
+    $options = get_option('durchblick_connector_options');
     ?>
-    <input type='text' class='color-field' name='durchblick_widget_options[dotColor]' value='<?php echo $options['dotColor']; ?>'>
+    <input type='text' class='color-field' name='durchblick_connector_options[dotColor]' value='<?php echo $options['dotColor']; ?>'>
     <?php
 }
 
-function durchblick_widget_dotSize_render() {
-    $options = get_option('durchblick_widget_options');
+function durchblick_connector_dotSize_render() {
+    $options = get_option('durchblick_connector_options');
     ?>
-    <input type='text' name='durchblick_widget_options[dotSize]' value='<?php echo $options['dotSize']; ?>'>
+    <input type='text' name='durchblick_connector_options[dotSize]' value='<?php echo $options['dotSize']; ?>'>
     <?php
 }
 
-function durchblick_widget_enterFeedbackModeText_render() {
-    $options = get_option('durchblick_widget_options');
+function durchblick_connector_enterFeedbackModeText_render() {
+    $options = get_option('durchblick_connector_options');
     ?>
-    <input type='text' name='durchblick_widget_options[enterFeedbackModeText]' value='<?php echo $options['enterFeedbackModeText']; ?>'>
+    <input type='text' name='durchblick_connector_options[enterFeedbackModeText]' value='<?php echo $options['enterFeedbackModeText']; ?>'>
     <?php
 }
 
-function durchblick_widget_exitFeedbackModeText_render() {
-    $options = get_option('durchblick_widget_options');
+function durchblick_connector_exitFeedbackModeText_render() {
+    $options = get_option('durchblick_connector_options');
     ?>
-    <input type='text' name='durchblick_widget_options[exitFeedbackModeText]' value='<?php echo $options['exitFeedbackModeText']; ?>'>
+    <input type='text' name='durchblick_connector_options[exitFeedbackModeText]' value='<?php echo $options['exitFeedbackModeText']; ?>'>
     <?php
 }
 
-// Sektion Callback
-function durchblick_widget_settings_section_callback() {
-    echo 'Konfiguriere die Einstellungen für das Durchblick Widget.';
+// Section callback
+function durchblick_connector_settings_section_callback() {
+    echo __('Configure the settings for the Durchblick Connector.', 'durchblick-connector');
 }
 
-// Optionen validieren
-function durchblick_widget_options_validate($input) {
+// Validate options
+function durchblick_connector_options_validate($input) {
     $input['apiKey'] = sanitize_text_field($input['apiKey']);
     $input['primaryColor'] = sanitize_text_field($input['primaryColor']);
     $input['secondaryColor'] = sanitize_text_field($input['secondaryColor']);
@@ -220,9 +222,9 @@ function durchblick_widget_options_validate($input) {
     return $input;
 }
 
-// JavaScript in den Header einfügen
-function durchblick_widget_enqueue_script() {
-    $options = get_option('durchblick_widget_options');
+// Enqueue JavaScript in the header
+function durchblick_connector_enqueue_script() {
+    $options = get_option('durchblick_connector_options');
     ?>
     <script src="https://durchblick.app/widget.js"></script>
     <script>
@@ -239,4 +241,10 @@ function durchblick_widget_enqueue_script() {
     </script>
     <?php
 }
-add_action('wp_head', 'durchblick_widget_enqueue_script');
+add_action('wp_head', 'durchblick_connector_enqueue_script');
+
+// Load text domain
+function durchblick_connector_load_textdomain() {
+    load_plugin_textdomain('durchblick-connector', false, basename(dirname(__FILE__)) . '/languages');
+}
+add_action('plugins_loaded', 'durchblick_connector_load_textdomain');

@@ -1,0 +1,51 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: de_DE\n"
+"Project-Id-Version: Durchblick Connector\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-19 13:45+0000\n"
+"PO-Revision-Date: 2024-07-19 13:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.11; wp-6.6"
+
+msgid "Durchblick Connector Settings"
+msgstr "Durchblick Connector Einstellungen"
+
+msgid "Durchblick Connector"
+msgstr "Durchblick Connector"
+
+msgid "Connector Settings"
+msgstr "Connector Einstellungen"
+
+msgid "API Key"
+msgstr "API Key"
+
+msgid "Allow Feedback"
+msgstr "Erlaube Feedback"
+
+msgid "Primary Color"
+msgstr "Primäre Farbe"
+
+msgid "Secondary Color"
+msgstr "Sekundäre Farbe"
+
+msgid "Dot Color"
+msgstr "Farbe des Punktes"
+
+msgid "Dot Size"
+msgstr "Größe des Punktes"
+
+msgid "Enter Feedback Mode Text"
+msgstr "Text zum Einschalten des Feedback Modus"
+
+msgid "Exit Feedback Mode Text"
+msgstr "Text zum Ausschalten des Feedback Modus"
+
+msgid "Configure the settings for the Durchblick Connector."
+msgstr "Einstellungen für den Durchblick Connector"

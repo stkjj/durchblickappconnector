@@ -11,3 +11,6 @@ settings page added
 
 ### 1.1.3
 color picker added
+
+### 1.2
+localization added

@@ -1,0 +1,40 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "Durchblick Connector Settings"
+msgstr ""
+
+msgid "Durchblick Connector"
+msgstr ""
+
+msgid "Connector Settings"
+msgstr ""
+
+msgid "API Key"
+msgstr ""
+
+msgid "Allow Feedback"
+msgstr ""
+
+msgid "Primary Color"
+msgstr ""
+
+msgid "Secondary Color"
+msgstr ""
+
+msgid "Dot Color"
+msgstr ""
+
+msgid "Dot Size"
+msgstr ""
+
+msgid "Enter Feedback Mode Text"
+msgstr ""
+
+msgid "Exit Feedback Mode Text"
+msgstr ""
+
+msgid "Configure the settings for the Durchblick Connector."
+msgstr ""
