@@ -15,6 +15,9 @@ msgstr ""
 msgid "API Key"
 msgstr ""
 
+msgid "Custom Button Selector"
+msgstr ""
+
 msgid "Allow Feedback"
 msgstr ""
 
@@ -30,10 +33,49 @@ msgstr ""
 msgid "Dot Size"
 msgstr ""
 
+msgid "Border Radius"
+msgstr ""
+
 msgid "Enter Feedback Mode Text"
 msgstr ""
 
 msgid "Exit Feedback Mode Text"
+msgstr ""
+
+msgid "Feedback Placeholder"
+msgstr ""
+
+msgid "Email Placeholder"
+msgstr ""
+
+msgid "Verification Code Placeholder"
+msgstr ""
+
+msgid "Verification Code Message"
+msgstr ""
+
+msgid "Submit Button Text"
+msgstr ""
+
+msgid "Cancel Button Text"
+msgstr ""
+
+msgid "Feedback Thank You Message"
+msgstr ""
+
+msgid "Feedback Loading Message"
+msgstr ""
+
+msgid "Feedback Error Message"
+msgstr ""
+
+msgid "Feedback First Time Message"
+msgstr ""
+
+msgid "Require Email Verification"
+msgstr ""
+
+msgid "Stay In Feedback Mode"
 msgstr ""
 
 msgid "Configure the settings for the Durchblick Connector."

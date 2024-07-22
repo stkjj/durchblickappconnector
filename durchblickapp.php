@@ -2,7 +2,7 @@
 /*
 Plugin Name: Durchblick Connector
 Description: Establishes the connction the <a href="https://durchblick.app/">Durchblick App Dashboard</a> and inserts the JavaScript Code for the Feedback Widget into the &lt;head&gt;.
-Version: 1.2
+Version: 1.3
 Author: KeDe Digital LLP
 Text Domain: durchblick-connector
 Domain Path: /languages
@@ -14,13 +14,27 @@ Primary Branch: main
 function durchblick_connector_get_default_options() {
     return array(
         'apiKey' => '',
+//         'customButtonSelector' => '',
         'publicFeedback' => false,
         'primaryColor' => '#333',
         'secondaryColor' => '#ccc',
         'dotColor' => '#f00',
         'dotSize' => '20px',
+//         'borderRadius' => '6px',
         'enterFeedbackModeText' => 'Feedback Mode Off',
-        'exitFeedbackModeText' => 'Feedback Mode On'
+        'exitFeedbackModeText' => 'Feedback Mode On',
+//         'feedbackPlaceholder' => 'Your feedback',
+//         'emailPlaceholder' => 'Your email',
+//         'verificationCodePlaceholder' => 'Verification code',
+//         'verificationCodeMessage' => 'Please enter the one-time verification code sent to your email.',
+//         'submitButtonText' => 'Submit',
+//         'cancelButtonText' => 'Cancel',
+//         'feedbackThankYouMessage' => 'Thank you for your feedback!',
+//         'feedbackLoadingMessage' => 'Loading...',
+//         'feedbackErrorMessage' => 'An error occurred while sending your feedback. Please try again later.',
+//         'feedbackFirstTimeMessage' => 'Welcome to Feedback Mode! Click anywhere to give feedback.',
+//         'requireEmailVerification' => true,
+//         'stayInFeedbackMode' => false
     );
 }
 
@@ -71,71 +85,67 @@ function durchblick_connector_settings_init() {
         'durchblick-connector'
     );
 
-    add_settings_field(
-        'apiKey',
-        __('API Key', 'durchblick-connector'),
-        'durchblick_connector_apiKey_render',
-        'durchblick-connector',
-        'durchblick_connector_settings_section'
+    $fields = array(
+        'apiKey' => array('label' => __('API Key', 'durchblick-connector'), 'type' => 'text'),
+//         'customButtonSelector' => array('label' => __('Custom Button Selector', 'durchblick-connector'), 'type' => 'text'),
+        'publicFeedback' => array('label' => __('Public Feedback', 'durchblick-connector'), 'type' => 'checkbox'),
+        'primaryColor' => array('label' => __('Primary Color', 'durchblick-connector'), 'type' => 'color'),
+        'secondaryColor' => array('label' => __('Secondary Color', 'durchblick-connector'), 'type' => 'color'),
+        'dotColor' => array('label' => __('Dot Color', 'durchblick-connector'), 'type' => 'color'),
+        'dotSize' => array('label' => __('Dot Size', 'durchblick-connector'), 'type' => 'text'),
+//         'borderRadius' => array('label' => __('Border Radius', 'durchblick-connector'), 'type' => 'text'),
+        'enterFeedbackModeText' => array('label' => __('Enter Feedback Mode Text', 'durchblick-connector'), 'type' => 'text'),
+        'exitFeedbackModeText' => array('label' => __('Exit Feedback Mode Text', 'durchblick-connector'), 'type' => 'text'),
+//         'feedbackPlaceholder' => array('label' => __('Feedback Placeholder', 'durchblick-connector'), 'type' => 'text'),
+//         'emailPlaceholder' => array('label' => __('Email Placeholder', 'durchblick-connector'), 'type' => 'text'),
+//         'verificationCodePlaceholder' => array('label' => __('Verification Code Placeholder', 'durchblick-connector'), 'type' => 'text'),
+//         'verificationCodeMessage' => array('label' => __('Verification Code Message', 'durchblick-connector'), 'type' => 'text'),
+//         'submitButtonText' => array('label' => __('Submit Button Text', 'durchblick-connector'), 'type' => 'text'),
+//         'cancelButtonText' => array('label' => __('Cancel Button Text', 'durchblick-connector'), 'type' => 'text'),
+//         'feedbackThankYouMessage' => array('label' => __('Feedback Thank You Message', 'durchblick-connector'), 'type' => 'text'),
+//         'feedbackLoadingMessage' => array('label' => __('Feedback Loading Message', 'durchblick-connector'), 'type' => 'text'),
+//         'feedbackErrorMessage' => array('label' => __('Feedback Error Message', 'durchblick-connector'), 'type' => 'text'),
+//         'feedbackFirstTimeMessage' => array('label' => __('Feedback First Time Message', 'durchblick-connector'), 'type' => 'text'),
+//         'requireEmailVerification' => array('label' => __('Require Email Verification', 'durchblick-connector'), 'type' => 'checkbox'),
+//         'stayInFeedbackMode' => array('label' => __('Stay In Feedback Mode', 'durchblick-connector'), 'type' => 'checkbox')
     );
 
-    add_settings_field(
-        'publicFeedback',
-        __('Allow Feedback', 'durchblick-connector'),
-        'durchblick_connector_publicFeedback_render',
-        'durchblick-connector',
-        'durchblick_connector_settings_section'
-    );
-
-    add_settings_field(
-        'primaryColor',
-        __('Primary Color', 'durchblick-connector'),
-        'durchblick_connector_primaryColor_render',
-        'durchblick-connector',
-        'durchblick_connector_settings_section'
-    );
-
-    add_settings_field(
-        'secondaryColor',
-        __('Secondary Color', 'durchblick-connector'),
-        'durchblick_connector_secondaryColor_render',
-        'durchblick-connector',
-        'durchblick_connector_settings_section'
-    );
-
-    add_settings_field(
-        'dotColor',
-        __('Dot Color', 'durchblick-connector'),
-        'durchblick_connector_dotColor_render',
-        'durchblick-connector',
-        'durchblick_connector_settings_section'
-    );
-
-    add_settings_field(
-        'dotSize',
-        __('Dot Size', 'durchblick-connector'),
-        'durchblick_connector_dotSize_render',
-        'durchblick-connector',
-        'durchblick_connector_settings_section'
-    );
-
-    add_settings_field(
-        'enterFeedbackModeText',
-        __('Enter Feedback Mode Text', 'durchblick-connector'),
-        'durchblick_connector_enterFeedbackModeText_render',
-        'durchblick-connector',
-        'durchblick_connector_settings_section'
-    );
-
-    add_settings_field(
-        'exitFeedbackModeText',
-        __('Exit Feedback Mode Text', 'durchblick-connector'),
-        'durchblick_connector_exitFeedbackModeText_render',
-        'durchblick-connector',
-        'durchblick_connector_settings_section'
-    );
+    foreach ($fields as $field => $data) {
+        add_settings_field(
+            $field,
+            $data['label'],
+            'durchblick_connector_render_field',
+            'durchblick-connector',
+            'durchblick_connector_settings_section',
+            array(
+                'field' => $field,
+                'type' => $data['type']
+            )
+        );
+    }
 }
 add_action('admin_init', 'durchblick_connector_settings_init');
+
+// Render fields
+function durchblick_connector_render_field($args) {
+    $options = get_option('durchblick_connector_options');
+    $field = $args['field'];
+    $type = $args['type'];
+    $value = isset($options[$field]) ? esc_attr($options[$field]) : '';
+    
+    switch ($type) {
+        case 'text':
+            echo "<input type='text' name='durchblick_connector_options[$field]' value='$value'>";
+            break;
+        case 'checkbox':
+            $checked = $value ? 'checked' : '';
+            echo "<input type='checkbox' name='durchblick_connector_options[$field]' value='1' $checked>";
+            break;
+        case 'color':
+            echo "<input type='text' class='color-field' name='durchblick_connector_options[$field]' value='$value'>";
+            break;
+    }
+}
 
 // Enqueue color picker scripts and styles
 function durchblick_connector_enqueue_color_picker($hook_suffix) {
@@ -147,63 +157,6 @@ function durchblick_connector_enqueue_color_picker($hook_suffix) {
 }
 add_action('admin_enqueue_scripts', 'durchblick_connector_enqueue_color_picker');
 
-// Render fields
-function durchblick_connector_apiKey_render() {
-    $options = get_option('durchblick_connector_options');
-    ?>
-    <input type='text' name='durchblick_connector_options[apiKey]' value='<?php echo $options['apiKey']; ?>'>
-    <?php
-}
-
-function durchblick_connector_publicFeedback_render() {
-    $options = get_option('durchblick_connector_options');
-    ?>
-    <input type='checkbox' name='durchblick_connector_options[publicFeedback]' <?php checked($options['publicFeedback'], 1); ?> value='1'>
-    <?php
-}
-
-function durchblick_connector_primaryColor_render() {
-    $options = get_option('durchblick_connector_options');
-    ?>
-    <input type='text' class='color-field' name='durchblick_connector_options[primaryColor]' value='<?php echo $options['primaryColor']; ?>'>
-    <?php
-}
-
-function durchblick_connector_secondaryColor_render() {
-    $options = get_option('durchblick_connector_options');
-    ?>
-    <input type='text' class='color-field' name='durchblick_connector_options[secondaryColor]' value='<?php echo $options['secondaryColor']; ?>'>
-    <?php
-}
-
-function durchblick_connector_dotColor_render() {
-    $options = get_option('durchblick_connector_options');
-    ?>
-    <input type='text' class='color-field' name='durchblick_connector_options[dotColor]' value='<?php echo $options['dotColor']; ?>'>
-    <?php
-}
-
-function durchblick_connector_dotSize_render() {
-    $options = get_option('durchblick_connector_options');
-    ?>
-    <input type='text' name='durchblick_connector_options[dotSize]' value='<?php echo $options['dotSize']; ?>'>
-    <?php
-}
-
-function durchblick_connector_enterFeedbackModeText_render() {
-    $options = get_option('durchblick_connector_options');
-    ?>
-    <input type='text' name='durchblick_connector_options[enterFeedbackModeText]' value='<?php echo $options['enterFeedbackModeText']; ?>'>
-    <?php
-}
-
-function durchblick_connector_exitFeedbackModeText_render() {
-    $options = get_option('durchblick_connector_options');
-    ?>
-    <input type='text' name='durchblick_connector_options[exitFeedbackModeText]' value='<?php echo $options['exitFeedbackModeText']; ?>'>
-    <?php
-}
-
 // Section callback
 function durchblick_connector_settings_section_callback() {
     echo __('Configure the settings for the Durchblick Connector.', 'durchblick-connector');
@@ -212,13 +165,26 @@ function durchblick_connector_settings_section_callback() {
 // Validate options
 function durchblick_connector_options_validate($input) {
     $input['apiKey'] = sanitize_text_field($input['apiKey']);
+//     $input['customButtonSelector'] = sanitize_text_field($input['customButtonSelector']);
     $input['primaryColor'] = sanitize_text_field($input['primaryColor']);
     $input['secondaryColor'] = sanitize_text_field($input['secondaryColor']);
     $input['dotColor'] = sanitize_text_field($input['dotColor']);
     $input['dotSize'] = sanitize_text_field($input['dotSize']);
+//     $input['borderRadius'] = sanitize_text_field($input['borderRadius']);
     $input['enterFeedbackModeText'] = sanitize_text_field($input['enterFeedbackModeText']);
     $input['exitFeedbackModeText'] = sanitize_text_field($input['exitFeedbackModeText']);
-    $input['publicFeedback'] = isset($input['publicFeedback']) ? 1 : 0;
+//     $input['feedbackPlaceholder'] = sanitize_text_field($input['feedbackPlaceholder']);
+//     $input['emailPlaceholder'] = sanitize_text_field($input['emailPlaceholder']);
+//     $input['verificationCodePlaceholder'] = sanitize_text_field($input['verificationCodePlaceholder']);
+//     $input['verificationCodeMessage'] = sanitize_text_field($input['verificationCodeMessage']);
+//     $input['submitButtonText'] = sanitize_text_field($input['submitButtonText']);
+//     $input['cancelButtonText'] = sanitize_text_field($input['cancelButtonText']);
+//     $input['feedbackThankYouMessage'] = sanitize_text_field($input['feedbackThankYouMessage']);
+//     $input['feedbackLoadingMessage'] = sanitize_text_field($input['feedbackLoadingMessage']);
+//     $input['feedbackErrorMessage'] = sanitize_text_field($input['feedbackErrorMessage']);
+//     $input['feedbackFirstTimeMessage'] = sanitize_text_field($input['feedbackFirstTimeMessage']);
+//     $input['requireEmailVerification'] = isset($input['requireEmailVerification']) ? 1 : 0;
+//     $input['stayInFeedbackMode'] = isset($input['stayInFeedbackMode']) ? 1 : 0;
     return $input;
 }
 
@@ -230,13 +196,27 @@ function durchblick_connector_enqueue_script() {
     <script>
         DurchblickWidget.init({
             apiKey: '<?php echo esc_js($options['apiKey']); ?>',
+//             customButtonSelector: <?php echo $options['customButtonSelector'] ? "'". esc_js($options['customButtonSelector']) . "'" : 'null'; ?>,
             publicFeedback: <?php echo $options['publicFeedback'] ? 'true' : 'false'; ?>,
             primaryColor: '<?php echo esc_js($options['primaryColor']); ?>',
             secondaryColor: '<?php echo esc_js($options['secondaryColor']); ?>',
             dotSize: '<?php echo esc_js($options['dotSize']); ?>',
             dotColor: '<?php echo esc_js($options['dotColor']); ?>',
+//             borderRadius: '<?php echo esc_js($options['borderRadius']); ?>',
             enterFeedbackModeText: '<?php echo esc_js($options['enterFeedbackModeText']); ?>',
-            exitFeedbackModeText: '<?php echo esc_js($options['exitFeedbackModeText']); ?>'
+            exitFeedbackModeText: '<?php echo esc_js($options['exitFeedbackModeText']); ?>',
+//             feedbackPlaceholder: '<?php echo esc_js($options['feedbackPlaceholder']); ?>',
+//             emailPlaceholder: '<?php echo esc_js($options['emailPlaceholder']); ?>',
+//             verificationCodePlaceholder: '<?php echo esc_js($options['verificationCodePlaceholder']); ?>',
+//             verificationCodeMessage: '<?php echo esc_js($options['verificationCodeMessage']); ?>',
+//             submitButtonText: '<?php echo esc_js($options['submitButtonText']); ?>',
+//             cancelButtonText: '<?php echo esc_js($options['cancelButtonText']); ?>',
+//             feedbackThankYouMessage: '<?php echo esc_js($options['feedbackThankYouMessage']); ?>',
+//             feedbackLoadingMessage: '<?php echo esc_js($options['feedbackLoadingMessage']); ?>',
+//             feedbackErrorMessage: '<?php echo esc_js($options['feedbackErrorMessage']); ?>',
+//             feedbackFirstTimeMessage: '<?php echo esc_js($options['feedbackFirstTimeMessage']); ?>',
+//             requireEmailVerification: <?php echo $options['requireEmailVerification'] ? 'true' : 'false'; ?>,
+//             stayInFeedbackMode: <?php echo $options['stayInFeedbackMode'] ? 'true' : 'false'; ?>
         });
     </script>
     <?php

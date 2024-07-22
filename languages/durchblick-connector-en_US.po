@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
-"Language: de_DE\n"
+"Language: en_US\n"
 "Project-Id-Version: Durchblick Connector\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-19 13:45+0000\n"
-"PO-Revision-Date: 2024-07-22 06:41+0000\n"
+"POT-Creation-Date: 2024-07-19 13:43+0000\n"
+"PO-Revision-Date: 2024-07-22 06:29+0000\n"
 "Last-Translator: \n"
-"Language-Team: German\n"
+"Language-Team: English (United States)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,79 +15,79 @@ msgstr ""
 "X-Loco-Version: 2.6.11; wp-6.6"
 
 msgid "Allow Feedback"
-msgstr "Erlaube Feedback"
+msgstr "Allow Feedback"
 
 msgid "API Key"
 msgstr "API Key"
 
 msgid "Border Radius"
-msgstr "Eckenradius"
+msgstr "Border Radius"
 
 msgid "Cancel Button Text"
-msgstr "Button Beschriftung Abbrechen"
+msgstr "Cancel Button Text"
 
 msgid "Configure the settings for the Durchblick Connector."
-msgstr "Einstellungen für den Durchblick Connector"
+msgstr "Configure the settings for the Durchblick Connector."
 
 msgid "Connector Settings"
-msgstr "Connector Einstellungen"
+msgstr "Connector Settings"
 
 msgid "Custom Button Selector"
-msgstr "Individueller Button Wahlschalter"
+msgstr "Custom Button Selector"
 
 msgid "Dot Color"
-msgstr "Farbe des Punktes"
+msgstr "Dot Color"
 
 msgid "Dot Size"
-msgstr "Größe des Punktes"
+msgstr "Dot Size"
 
 msgid "Durchblick Connector"
 msgstr "Durchblick Connector"
 
 msgid "Durchblick Connector Settings"
-msgstr "Durchblick Connector Einstellungen"
+msgstr "Durchblick Connector Settings"
 
 msgid "Email Placeholder"
-msgstr "Platzhalter für E-Mail-Adresse"
+msgstr "Email Placeholder"
 
 msgid "Enter Feedback Mode Text"
-msgstr "Text zum Einschalten des Feedback Modus"
+msgstr "Enter Feedback Mode Text"
 
 msgid "Exit Feedback Mode Text"
-msgstr "Text zum Ausschalten des Feedback Modus"
+msgstr "Exit Feedback Mode Text"
 
 msgid "Feedback Error Message"
-msgstr "Feedback Fehlermeldung "
+msgstr "Feedback Error Message"
 
 msgid "Feedback First Time Message"
-msgstr "Meldung bei erstmaligem Feedback"
+msgstr "Feedback First Time Message"
 
 msgid "Feedback Loading Message"
-msgstr "Anzeige wenn Feedback geladen wird"
+msgstr "Feedback Loading Message"
 
 msgid "Feedback Placeholder"
-msgstr "Feedback Platzhalter"
+msgstr "Feedback Placeholder"
 
 msgid "Feedback Thank You Message"
-msgstr "Danke für Feedback Nachricht"
+msgstr "Feedback Thank You Message"
 
 msgid "Primary Color"
-msgstr "Primäre Farbe"
+msgstr "Primary Color"
 
 msgid "Require Email Verification"
-msgstr "E-Mail Bestätigung erforderlich"
+msgstr "Require Email Verification"
 
 msgid "Secondary Color"
-msgstr "Sekundäre Farbe"
+msgstr "Secondary Color"
 
 msgid "Stay In Feedback Mode"
-msgstr "Bleibe im Feedback Modus"
+msgstr "Stay In Feedback Mode"
 
 msgid "Submit Button Text"
-msgstr "Text für den Absende-Button"
+msgstr "Submit Button Text"
 
 msgid "Verification Code Message"
-msgstr "Text für die Eingabe des Bestätigungscodes"
+msgstr "Verification Code Message"
 
 msgid "Verification Code Placeholder"
-msgstr "Text für den Bestätigungscode Platzhalter"
+msgstr "Verification Code Placeholder"
